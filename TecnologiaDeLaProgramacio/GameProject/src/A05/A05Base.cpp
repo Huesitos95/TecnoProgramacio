@@ -40,11 +40,17 @@ int main(int, char*[]) {
 	// --- TEXT ---
 	TTF_Font *font{ TTF_OpenFont("../../res/ttf/saiyan.ttf",80) };
 	if (font == nullptr) throw "No es pot inicialitzar el TTF_Font";
-	SDL_Surface *tmpSurf{ TTF_RenderText_Blended(font,"My first SDL game",SDL_Color{255,150,0,250}) };
+	SDL_Surface *tmpSurf{ TTF_RenderText_Blended(font,"PLAY MUSIC",SDL_Color{0,255,50,250}) };
 	if (tmpSurf == nullptr) throw "Unable to create SDL Text Surface";
 	SDL_Texture *textTexture{ SDL_CreateTextureFromSurface(renderer,tmpSurf) };
 	SDL_Rect textRect{ 100,50,tmpSurf->w,tmpSurf->h };
 	SDL_FreeSurface(tmpSurf);
+
+	SDL_Surface *tmpSurf2{ TTF_RenderText_Blended(font,"STOP MUSIC",SDL_Color{255,0,0,250}) };
+	if (tmpSurf2 == nullptr) throw "Unable to create SDL Text Surface";
+	SDL_Texture *textTexture2{ SDL_CreateTextureFromSurface(renderer,tmpSurf2) };
+	SDL_Rect text2Rect{ 100,200,tmpSurf2->w,tmpSurf2->h };
+	SDL_FreeSurface(tmpSurf2);
 	TTF_CloseFont(font);
 
 	// --- AUDIO ---
@@ -69,6 +75,7 @@ int main(int, char*[]) {
 				playerTarget.x = event.motion.x - 50;
 				playerTarget.y = event.motion.y - 50;
 				break;
+
 			default:;
 			}
 		}
@@ -83,6 +90,7 @@ int main(int, char*[]) {
 		SDL_RenderCopy(renderer, bgTexture, nullptr, &bgRect);
 		SDL_RenderCopy(renderer, playerTexture, nullptr, &playerRect);
 		SDL_RenderCopy(renderer, textTexture, nullptr, &textRect);
+		SDL_RenderCopy(renderer, textTexture2, nullptr, &text2Rect);
 			//Animated Sprite
 		SDL_RenderPresent(renderer);
 
@@ -93,6 +101,7 @@ int main(int, char*[]) {
 	SDL_DestroyTexture(playerTexture);
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyTexture(textTexture);
+	SDL_DestroyTexture(textTexture2);
 	SDL_DestroyWindow(window);
 
 	// --- QUIT ---
@@ -103,3 +112,8 @@ int main(int, char*[]) {
 	SDL_Quit();
 	return 0;
 }
+//
+//bool isOnButton(SDL_Rect)
+//{
+//	if ()
+//};
