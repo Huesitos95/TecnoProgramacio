@@ -49,6 +49,20 @@ int main(int, char*[]) {
 	playerPosition.w = playerRect.w = frameWidth;
 	int frameTime = 0;
 
+	//Player 2
+	SDL_Rect player2Target{ 0,0,100,100 };
+	int player2Direction = 0; // 0 Abajo, 1 Arriba, 2 IZQ, 3 DER
+
+	SDL_Texture *player2Texture{ IMG_LoadTexture(renderer, "../../res/img/spCastle.png") };
+	SDL_Rect player2Rect, player2Position;
+	SDL_QueryTexture(player2Texture, NULL, NULL, &textWidth, &textHeight);
+	player2Position.x = 1000;
+	player2Position.y = 200;
+	player2Rect.x = 3*frameWidth;
+	player2Rect.y = 0;
+	player2Position.h = player2Rect.h = frameHeight;
+	player2Position.w = player2Rect.w = frameWidth;
+
 	// --- TEXT ---
 	TTF_Font *font{ TTF_OpenFont("../../res/ttf/MarioLuigi2.ttf",30) };
 	if (font == nullptr) throw "No es pot inicialitzar el TTF_Font";
@@ -83,11 +97,12 @@ int main(int, char*[]) {
 			switch (event.type) {
 			case SDL_QUIT:		isRunning = false; break;
 			case SDL_KEYDOWN:	if (event.key.keysym.sym == SDLK_ESCAPE) isRunning = false; 
+				//PLayer1
 				if (event.key.keysym.sym == SDLK_w)
 				{
 					if (playerPosition.y > 180) 
 					{
-						playerPosition.y--;
+						playerPosition.y-=5;
 						playerDirection = 1;
 					}
 				}
@@ -96,7 +111,7 @@ int main(int, char*[]) {
 				{
 					if (playerPosition.x > 0)
 					{
-						playerPosition.x--;
+						playerPosition.x-=5;
 						playerDirection = 2;
 					}
 				}
@@ -105,7 +120,7 @@ int main(int, char*[]) {
 				{
 					if (playerPosition.y < 700 - frameHeight)
 					{
-						playerPosition.y++;
+						playerPosition.y+=5;
 						playerDirection = 0;
 					}
 				}
@@ -114,14 +129,52 @@ int main(int, char*[]) {
 				{
 					if (playerPosition.x < 1251 - frameWidth)
 					{
-						playerPosition.x++;
+						playerPosition.x+=5;
 						playerDirection = 3;
+					}
+				}
+
+				//Player2
+				if (event.key.keysym.sym == SDLK_UP)
+				{
+					if (player2Position.y > 180)
+					{
+						player2Position.y -= 5;
+						player2Direction = 1;
+					}
+				}
+
+				if (event.key.keysym.sym == SDLK_LEFT)
+				{
+					if (player2Position.x > 0)
+					{
+						player2Position.x -= 5;
+						player2Direction = 2;
+					}
+				}
+
+				if (event.key.keysym.sym == SDLK_DOWN)
+				{
+					if (player2Position.y < 700 - frameHeight)
+					{
+						player2Position.y += 5;
+						player2Direction = 0;
+					}
+				}
+
+				if (event.key.keysym.sym == SDLK_RIGHT)
+				{
+					if (player2Position.x < 1251 - frameWidth)
+					{
+						player2Position.x += 5;
+						player2Direction = 3;
 					}
 				}
 				break;
 				
 			default:;
 			}
+			//PLAYER 1
 			if (playerDirection == 0) // ABAJO
 			{
 				playerRect.y = 0;
@@ -138,6 +191,23 @@ int main(int, char*[]) {
 			{
 				playerRect.y = 64;
 			}
+			//PLAYER 2
+			if (player2Direction == 0) // ABAJO
+			{
+				player2Rect.y = 0;
+			}
+			if (player2Direction == 1) // ARRIBA
+			{
+				player2Rect.y = 96;
+			}
+			if (player2Direction == 2) // IZQ
+			{
+				player2Rect.y = 32;
+			}
+			if (player2Direction == 3) // DER
+			{
+				player2Rect.y = 64;
+			}
 		}
 
 		// UPDATE
@@ -147,9 +217,14 @@ int main(int, char*[]) {
 		if (FPS / frameTime <= 9) {
 			frameTime = 0;
 			playerRect.x += frameWidth;
+			player2Rect.x += frameWidth;
 			if (playerRect.x >= textWidth / 4) {
 
 				playerRect.x = 0;
+			}
+			if (player2Rect.x >= textWidth / 4 + 96)
+			{
+				player2Rect.x = 96;
 			}
 		}
 
@@ -163,6 +238,7 @@ int main(int, char*[]) {
 		SDL_RenderCopy(renderer, textTexture2, nullptr, &text2Rect);
 		//Animated Sprite
 		SDL_RenderCopy(renderer, playerTexture, &playerRect, &playerPosition);
+		SDL_RenderCopy(renderer, player2Texture, &player2Rect, &player2Position);
 		SDL_RenderPresent(renderer);
 
 
