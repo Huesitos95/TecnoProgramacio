@@ -33,6 +33,10 @@ int main(int, char*[]) {
 	if (bgTexture == nullptr) throw "No s'han pogut crear les textures";
 	SDL_Rect bgRect{ 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 
+	SDL_Texture *goldTexture{ IMG_LoadTexture(renderer, "../../res/img/gold.png") };
+	if (goldTexture == nullptr) throw "No s'han pogut crear les textures";
+	SDL_Rect goldRect{ 350,350,50,50 };
+
 	// --- Animated Sprite ---
 	SDL_Rect playerTarget{ 0,0,100,100 };
 	int playerDirection = 0; // 0 Abajo, 1 Arriba, 2 IZQ, 3 DER
@@ -236,6 +240,7 @@ int main(int, char*[]) {
 		SDL_RenderCopy(renderer, playerTexture, &playerRect, &playerPosition);
 		SDL_RenderCopy(renderer, textTexture, nullptr, &textRect);
 		SDL_RenderCopy(renderer, textTexture2, nullptr, &text2Rect);
+		SDL_RenderCopy(renderer, goldTexture, nullptr, &goldRect);
 		//Animated Sprite
 		SDL_RenderCopy(renderer, playerTexture, &playerRect, &playerPosition);
 		SDL_RenderCopy(renderer, player2Texture, &player2Rect, &player2Position);
@@ -248,10 +253,12 @@ int main(int, char*[]) {
 	// --- DESTROY ---
 	SDL_DestroyTexture(bgTexture);
 	SDL_DestroyTexture(playerTexture);
+	SDL_DestroyTexture(goldTexture);
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyTexture(textTexture);
 	SDL_DestroyTexture(textTexture2);
 	SDL_DestroyWindow(window);
+
 
 	// --- QUIT ---
 	IMG_Quit();
