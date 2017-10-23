@@ -2,6 +2,7 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
+#include <iostream>
 
 //Game general information
 #define SCREEN_WIDTH 1251
@@ -33,13 +34,8 @@ int main(int, char*[]) {
 	SDL_Rect bgRect{ 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 
 	// --- Animated Sprite ---
-
-	/*
-	SDL_Texture *playerTexture{ IMG_LoadTexture(renderer, "../../res/img/kintoun.png") };
-	if (playerTexture == nullptr) throw "No s'han pogut crear les textures";
-	SDL_Rect playerRect{ 0,0,350,189 };
-	*/
 	SDL_Rect playerTarget{ 0,0,100,100 };
+	int playerDirection = 0; // 0 Abajo, 1 Arriba, 2 IZQ, 3 DER
 
 	SDL_Texture *playerTexture{ IMG_LoadTexture(renderer, "../../res/img/spCastle.png") };
 	SDL_Rect playerRect, playerPosition;
@@ -86,14 +82,61 @@ int main(int, char*[]) {
 		while (SDL_PollEvent(&event)) {
 			switch (event.type) {
 			case SDL_QUIT:		isRunning = false; break;
-			case SDL_KEYDOWN:	if (event.key.keysym.sym == SDLK_ESCAPE) isRunning = false; break;
-				/*
-				case SDL_MOUSEMOTION:playerRect.x = event.motion.x - (playerRect.x / 2); playerRect.y = event.motion.y - (playerRect.y / 2);
-				playerTarget.x = event.motion.x - 50;
-				playerTarget.y = event.motion.y - 50;
+			case SDL_KEYDOWN:	if (event.key.keysym.sym == SDLK_ESCAPE) isRunning = false; 
+				if (event.key.keysym.sym == SDLK_w)
+				{
+					if (playerPosition.y > 180) 
+					{
+						playerPosition.y--;
+						playerDirection = 1;
+					}
+				}
+
+				if (event.key.keysym.sym == SDLK_a) 
+				{
+					if (playerPosition.x > 0)
+					{
+						playerPosition.x--;
+						playerDirection = 2;
+					}
+				}
+
+				if (event.key.keysym.sym == SDLK_s)
+				{
+					if (playerPosition.y < 700 - frameHeight)
+					{
+						playerPosition.y++;
+						playerDirection = 0;
+					}
+				}
+
+				if (event.key.keysym.sym == SDLK_d)
+				{
+					if (playerPosition.x < 1251 - frameWidth)
+					{
+						playerPosition.x++;
+						playerDirection = 3;
+					}
+				}
 				break;
-				*/
+				
 			default:;
+			}
+			if (playerDirection == 0) // ABAJO
+			{
+				playerRect.y = 0;
+			}
+			if (playerDirection == 1) // ARRIBA
+			{
+				playerRect.y = 96;
+			}
+			if (playerDirection == 2) // IZQ
+			{
+				playerRect.y = 32;
+			}
+			if (playerDirection == 3) // DER
+			{
+				playerRect.y = 64;
 			}
 		}
 
@@ -104,8 +147,10 @@ int main(int, char*[]) {
 		if (FPS / frameTime <= 9) {
 			frameTime = 0;
 			playerRect.x += frameWidth;
-			if (playerRect.x >= textWidth / 4)
+			if (playerRect.x >= textWidth / 4) {
+
 				playerRect.x = 0;
+			}
 		}
 
 
@@ -140,11 +185,6 @@ int main(int, char*[]) {
 	SDL_Quit();
 	return 0;
 }
-//
-//bool isOnButton(SDL_Rect)
-//{
-//	if ()
-//};
 
 
 
