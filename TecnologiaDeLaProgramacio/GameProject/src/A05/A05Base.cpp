@@ -4,8 +4,8 @@
 #include <SDL_mixer.h>
 
 //Game general information
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH 1251
+#define SCREEN_HEIGHT 705
 #define FPS 60
 
 int main(int, char*[]) {
@@ -28,7 +28,7 @@ int main(int, char*[]) {
 	if (renderer == nullptr) throw "No es pot inicialitzar SDL_Renderer";
 
 	// --- SPRITES ---
-	SDL_Texture *bgTexture{ IMG_LoadTexture(renderer, "../../res/img/bg.jpg") };
+	SDL_Texture *bgTexture{ IMG_LoadTexture(renderer, "../../res/img/bgCastle.jpg") };
 	if (bgTexture == nullptr) throw "No s'han pogut crear les textures";
 	SDL_Rect bgRect{ 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 
@@ -41,31 +41,31 @@ int main(int, char*[]) {
 	*/
 	SDL_Rect playerTarget{ 0,0,100,100 };
 
-	SDL_Texture *playerTexture{ IMG_LoadTexture(renderer, "../../res/img/sp01.png") };
+	SDL_Texture *playerTexture{ IMG_LoadTexture(renderer, "../../res/img/spCastle.png") };
 	SDL_Rect playerRect, playerPosition;
 	int textWidth, textHeight, frameWidth, frameHeight;
 	SDL_QueryTexture(playerTexture, NULL, NULL, &textWidth, &textHeight);
-	frameWidth = textWidth / 6;
-	frameHeight = textHeight / 1;
-	playerPosition.x = playerPosition.y = 0;
+	frameWidth = textWidth / 12;
+	frameHeight = textHeight / 8;
+	playerPosition.x = playerPosition.y = 200;
 	playerRect.x = playerRect.y = 0;
 	playerPosition.h = playerRect.h = frameHeight;
 	playerPosition.w = playerRect.w = frameWidth;
 	int frameTime = 0;
 
 	// --- TEXT ---
-	TTF_Font *font{ TTF_OpenFont("../../res/ttf/saiyan.ttf",80) };
+	TTF_Font *font{ TTF_OpenFont("../../res/ttf/MarioLuigi2.ttf",30) };
 	if (font == nullptr) throw "No es pot inicialitzar el TTF_Font";
-	SDL_Surface *tmpSurf{ TTF_RenderText_Blended(font,"PLAY MUSIC",SDL_Color{ 0,255,50,250 }) };
+	SDL_Surface *tmpSurf{ TTF_RenderText_Blended(font,"Player 1: ",SDL_Color{ 0,0,0,250 }) };
 	if (tmpSurf == nullptr) throw "Unable to create SDL Text Surface";
 	SDL_Texture *textTexture{ SDL_CreateTextureFromSurface(renderer,tmpSurf) };
-	SDL_Rect textRect{ 200,150,tmpSurf->w,tmpSurf->h };
+	SDL_Rect textRect{ 50,50,tmpSurf->w,tmpSurf->h };
 	SDL_FreeSurface(tmpSurf);
 
-	SDL_Surface *tmpSurf2{ TTF_RenderText_Blended(font,"STOP MUSIC",SDL_Color{ 255,0,0,250 }) };
+	SDL_Surface *tmpSurf2{ TTF_RenderText_Blended(font,"Player 2: ",SDL_Color{ 0,0,0,250 }) };
 	if (tmpSurf2 == nullptr) throw "Unable to create SDL Text Surface";
 	SDL_Texture *textTexture2{ SDL_CreateTextureFromSurface(renderer,tmpSurf2) };
-	SDL_Rect text2Rect{ 200,350,tmpSurf2->w,tmpSurf2->h };
+	SDL_Rect text2Rect{ 1000,50,tmpSurf2->w,tmpSurf2->h };
 	SDL_FreeSurface(tmpSurf2);
 	TTF_CloseFont(font);
 
@@ -104,9 +104,10 @@ int main(int, char*[]) {
 		if (FPS / frameTime <= 9) {
 			frameTime = 0;
 			playerRect.x += frameWidth;
-			if (playerRect.x >= textWidth)
+			if (playerRect.x >= textWidth / 4)
 				playerRect.x = 0;
 		}
+
 
 		// DRAW
 		//Background
@@ -144,4 +145,7 @@ int main(int, char*[]) {
 //{
 //	if ()
 //};
+
+
+
 
