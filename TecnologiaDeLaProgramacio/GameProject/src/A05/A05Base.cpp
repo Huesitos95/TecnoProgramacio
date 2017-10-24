@@ -35,7 +35,11 @@ int main(int, char*[]) {
 
 	SDL_Texture *goldTexture{ IMG_LoadTexture(renderer, "../../res/img/gold.png") };
 	if (goldTexture == nullptr) throw "No s'han pogut crear les textures";
-	SDL_Rect goldRect{ 350,350,50,50 };
+	SDL_Rect goldRect { rand() % 1200,rand() % 480 + 200,50,50 };
+	SDL_Rect goldRect2{ rand() % 1200,rand() % 480 + 200,50,50 };
+	SDL_Rect goldRect3{ rand() % 1200,rand() % 480 + 200,50,50 };
+	SDL_Rect goldRect4{ rand() % 1200,rand() % 480 + 200,50,50 };
+	SDL_Rect goldRect5{ rand() % 1200,rand() % 480 + 200,50,50 };
 
 	// --- Animated Sprite ---
 	SDL_Rect playerTarget{ 0,0,100,100 };
@@ -237,10 +241,13 @@ int main(int, char*[]) {
 		//Background
 		SDL_RenderClear(renderer);
 		SDL_RenderCopy(renderer, bgTexture, nullptr, &bgRect);
-		SDL_RenderCopy(renderer, playerTexture, &playerRect, &playerPosition);
 		SDL_RenderCopy(renderer, textTexture, nullptr, &textRect);
 		SDL_RenderCopy(renderer, textTexture2, nullptr, &text2Rect);
 		SDL_RenderCopy(renderer, goldTexture, nullptr, &goldRect);
+		SDL_RenderCopy(renderer, goldTexture, nullptr, &goldRect2);
+		SDL_RenderCopy(renderer, goldTexture, nullptr, &goldRect3);
+		SDL_RenderCopy(renderer, goldTexture, nullptr, &goldRect4);
+		SDL_RenderCopy(renderer, goldTexture, nullptr, &goldRect5);
 		//Animated Sprite
 		SDL_RenderCopy(renderer, playerTexture, &playerRect, &playerPosition);
 		SDL_RenderCopy(renderer, player2Texture, &player2Rect, &player2Position);
@@ -253,13 +260,14 @@ int main(int, char*[]) {
 	// --- DESTROY ---
 	SDL_DestroyTexture(bgTexture);
 	SDL_DestroyTexture(playerTexture);
+	SDL_DestroyTexture(player2Texture);
 	SDL_DestroyTexture(goldTexture);
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyTexture(textTexture);
 	SDL_DestroyTexture(textTexture2);
 	SDL_DestroyWindow(window);
 
-
+	
 	// --- QUIT ---
 	IMG_Quit();
 	TTF_Quit();
@@ -269,6 +277,26 @@ int main(int, char*[]) {
 	return 0;
 }
 
+bool Colision(SDL_Rect a, SDL_Rect b)
+{
+	// AABB 1
+	int x1Min = a.x;
+	int x1Max = a.x + a.w;
+	int y1Max = a.y + a.h;
+	int y1Min = a.y;
 
+	// AABB 2
+	int x2Min = b.x;
+	int x2Max = b.x + b.w;
+	int y2Max = b.y + b.h;
+	int y2Min = b.y;
 
+	// Collision tests
+	if (x1Max < x2Min || x1Min > x2Max) return false;
+	if (y1Max < y2Min || y1Min > y2Max) return false;
 
+	else
+	{
+		return true;
+	}
+}
