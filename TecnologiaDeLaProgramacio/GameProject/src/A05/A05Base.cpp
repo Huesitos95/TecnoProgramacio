@@ -3,6 +3,7 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 #include <iostream>
+#include "Renderer.h"
 
 //Game general information
 #define SCREEN_WIDTH 1251
