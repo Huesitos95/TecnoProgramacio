@@ -4,11 +4,7 @@
 #include <SDL_mixer.h>
 #include <iostream>
 #include "Renderer.h"
-
-//Game general information
-#define SCREEN_WIDTH 1251
-#define SCREEN_HEIGHT 705
-#define FPS 60
+#include "Constants.h"
 
 int main(int, char*[]) {
 
@@ -223,7 +219,7 @@ int main(int, char*[]) {
 		//playerRect.x += (playerTarget.x - playerRect.x) / 10;
 		//playerRect.y += (playerTarget.y - playerRect.y) / 10;
 		frameTime++;
-		if (FPS / frameTime <= 9) {
+		if (SCREEN_FPS / frameTime <= 9) {
 			frameTime = 0;
 			playerRect.x += frameWidth;
 			player2Rect.x += frameWidth;
@@ -280,13 +276,13 @@ int main(int, char*[]) {
 
 bool Colision(SDL_Rect a, SDL_Rect b)
 {
-	// AABB 1
+	// AABB Objecte 1
 	int x1Min = a.x;
 	int x1Max = a.x + a.w;
 	int y1Max = a.y + a.h;
 	int y1Min = a.y;
 
-	// AABB 2
+	// AABB 2 Objecte 2
 	int x2Min = b.x;
 	int x2Max = b.x + b.w;
 	int y2Max = b.y + b.h;

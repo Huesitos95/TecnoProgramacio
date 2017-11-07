@@ -12,3 +12,15 @@ Menu::~Menu()
 {
 
 }
+
+void Menu::Update()
+{
+}
+
+void Menu::Draw()
+{
+}
+
+void Menu::HandleEvents()
+{
+}

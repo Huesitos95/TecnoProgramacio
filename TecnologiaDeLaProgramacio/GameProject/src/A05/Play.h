@@ -4,8 +4,13 @@
 
 class Play : public Scene
 {
+private:
+
 public:
 	Play();
 	~Play();
+	void Update() override;
+	void Draw() override;
+	void HandleEvents() override;
 };
 

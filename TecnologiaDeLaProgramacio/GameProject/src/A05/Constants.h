@@ -3,8 +3,8 @@
 #define SCREEN_FPS 60.0f
 #define SCREEN_TICKS_PER_FRAME (1.0f / SCREEN_FPS)
 
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH 1251
+#define SCREEN_HEIGHT 705
 
 const std::string MENU_BG = "MENU_BG";
 const std::string PLAY_BG = "PLAY_BG";
