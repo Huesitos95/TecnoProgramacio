@@ -5,6 +5,10 @@
 class Play : public Scene
 {
 private:
+	
+	int level;
+	 //Background;
+
 
 public:
 	Play();
@@ -12,5 +16,7 @@ public:
 	void Update() override;
 	void Draw() override;
 	void HandleEvents() override;
+	void RestartLevel();
+	
 };
 

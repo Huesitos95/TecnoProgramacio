@@ -7,6 +7,7 @@
 #include "Types.h"
 #include "Constants.h"
 
+#define R Renderer::Instance()
 
 class Renderer {
 

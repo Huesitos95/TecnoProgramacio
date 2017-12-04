@@ -1,9 +1,11 @@
 #pragma once
 
+enum class SceneState { MENU, PLAY, RANKING };
+
 class Scene
 {
 protected:
-	enum SceneState{MENU,PLAY}; // Running / Exit?
+	
 	SceneState currentState;
 public:
 	Scene();
@@ -11,6 +13,6 @@ public:
 	virtual void Update();
 	virtual void Draw();
 	virtual void HandleEvents();
-	int GetCurrentState();
+	SceneState GetCurrentState();
 };
 
