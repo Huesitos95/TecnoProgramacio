@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BombermanMVC", "src\BombermanMVC\BombermanMVC.vcxproj", "{3A496106-51EC-41F7-84AC-B707414004C8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "G11_AA2-2", "src\G11_AA2-2\G11_AA2-2.vcxproj", "{236CA964-EDAE-4C14-9692-4CEFE24811F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3A496106-51EC-41F7-84AC-B707414004C8}.Debug|x64.ActiveCfg = Debug|x64
-		{3A496106-51EC-41F7-84AC-B707414004C8}.Debug|x64.Build.0 = Debug|x64
-		{3A496106-51EC-41F7-84AC-B707414004C8}.Debug|x86.ActiveCfg = Debug|Win32
-		{3A496106-51EC-41F7-84AC-B707414004C8}.Debug|x86.Build.0 = Debug|Win32
-		{3A496106-51EC-41F7-84AC-B707414004C8}.Release|x64.ActiveCfg = Release|x64
-		{3A496106-51EC-41F7-84AC-B707414004C8}.Release|x64.Build.0 = Release|x64
-		{3A496106-51EC-41F7-84AC-B707414004C8}.Release|x86.ActiveCfg = Release|Win32
-		{3A496106-51EC-41F7-84AC-B707414004C8}.Release|x86.Build.0 = Release|Win32
+		{236CA964-EDAE-4C14-9692-4CEFE24811F5}.Debug|x64.ActiveCfg = Debug|x64
+		{236CA964-EDAE-4C14-9692-4CEFE24811F5}.Debug|x64.Build.0 = Debug|x64
+		{236CA964-EDAE-4C14-9692-4CEFE24811F5}.Debug|x86.ActiveCfg = Debug|Win32
+		{236CA964-EDAE-4C14-9692-4CEFE24811F5}.Debug|x86.Build.0 = Debug|Win32
+		{236CA964-EDAE-4C14-9692-4CEFE24811F5}.Release|x64.ActiveCfg = Release|x64
+		{236CA964-EDAE-4C14-9692-4CEFE24811F5}.Release|x64.Build.0 = Release|x64
+		{236CA964-EDAE-4C14-9692-4CEFE24811F5}.Release|x86.ActiveCfg = Release|Win32
+		{236CA964-EDAE-4C14-9692-4CEFE24811F5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
