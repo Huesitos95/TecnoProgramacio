@@ -27,5 +27,7 @@ int main()
 	BinaryTree.PostOrder();
 	std::cout << std::endl;
 
+	int total = BinaryTree.GetNumberNodes();
+	std::cout << total << std::endl;
 	system("PAUSE");
 }

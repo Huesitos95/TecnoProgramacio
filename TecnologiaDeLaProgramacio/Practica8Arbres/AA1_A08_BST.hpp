@@ -23,6 +23,8 @@ public:
 	void InOrder();
 	void PostOrder();
 	bool Exist(int key);
+	int GetNumberNodes();
+	int Height();
 
 private:
 	Node *root;
@@ -31,7 +33,12 @@ private:
 	void PreOrder(Node *node);
 	void InOrder(Node *node);
 	void PostOrder(Node *node);
+	int GetNumberNodes(Node *nodo);
+	int GetNumberNodesl();
+	void PreOrderl();
+	
 
+	int Height(Node * node);
 
 };
 
@@ -46,9 +53,15 @@ BST::~BST() {
 		{
 			
 		}
+		else {
+			delete root->left;
+		}
 		if (root->right != nullptr)
 		{
-
+			
+		}
+		else {
+			delete root->right;
 		}
 	}
 };
@@ -142,6 +155,65 @@ void BST::PostOrder(Node *node)
 		std::cout << node->key << " ";
 
 	}
+}
+
+inline int BST::GetNumberNodes()
+{
+	int cont;
+	cont += GetNumberNodes(root->left) + GetNumberNodes(root->right);
+	return cont;
+}
+
+inline int BST::GetNumberNodes(Node *nodo) // Desde un nodo
+{
+	int contador;
+	//Recursiva
+	if (nodo != NULL)
+	{
+		
+		contador++;// Sumamos el nodo en el que estamos
+		GetNumberNodes(nodo->left); // Sumamos los nodos izq
+		GetNumberNodes(nodo->right); // Sumamos los nodos der
+	}
+	return contador;
+}
+
+inline int BST::GetNumberNodesl()
+{
+	// NO Recursiva
+	return 0;
+}
+
+inline void BST::PreOrderl()
+{
+
+}
+
+inline int BST::Height()
+{
+	if (Height(root->left) > Height(root->right))
+	{
+		return Height(root->left);
+	}
+		return Height(root->right);
+}
+
+inline int BST::Height(Node * node)
+{
+	int cont;
+	if (node != NULL)
+	{
+		if (node->left != NULL || node->right != NULL)
+		{
+			cont++;
+			Height(node->left);
+			Height(node->right);
+		}
+	}
+	else{
+		return 0;
+	}
+
 }
 
 bool BST::Exist(int key) {
