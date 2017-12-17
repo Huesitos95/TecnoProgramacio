@@ -1,8 +1,6 @@
 #pragma once
 #include "Renderer.h"
 
-enum class SceneState { MENU, PLAY, RANKING };
-
 class Scene
 {
 protected:

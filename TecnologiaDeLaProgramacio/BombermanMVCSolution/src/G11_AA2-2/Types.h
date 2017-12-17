@@ -23,3 +23,7 @@
 	};
 
 	enum class Key {UP, DOWN, LEFT, RIGHT, NONE};
+
+	enum class SceneState {RUNNING , GOTO, EXIT};
+
+	enum class GameState { MENU, PLAY, PLAY2 , RANKING , QUIT};
