@@ -1,17 +1,20 @@
 #pragma once
-#include "Renderer.h"
+#include "Types.h"
 
-class Scene
-{
+class Scene {
+
 protected:
-	
-	SceneState currentState;
+	SceneState scenestate;
+
+
 public:
 	Scene();
 	~Scene();
-	virtual void Update();
-	virtual void Draw();
-	virtual void HandleEvents();
-	SceneState GetCurrentState();
+
+	virtual void HandleEvents() = 0;
+	virtual void Update() = 0;
+	virtual void Draw() = 0;
+
+	SceneState getState();
 };
 

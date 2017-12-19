@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <SDL.h>
+#include "Constants.h"
 
 	using Rect = struct  Rect{ int  x; int y; int w; int h; };
 
@@ -22,8 +23,15 @@
 		int h;
 	};
 
+	enum class casillas : char {
+		DESTRUCTIBLE_WALL='w', INDESTRUCTIBLE_WALL = 'W', EMPTY = 'E', PLAYER = 'P', BOMB = 'B'
+	};
+
 	enum class Key {UP, DOWN, LEFT, RIGHT, NONE};
 
-	enum class SceneState {RUNNING , GOTO, EXIT};
+	enum class GameState { PLAY1, PLAY2, MENU, RANKING, EXIT };
 
-	enum class GameState { MENU, PLAY, PLAY2 , RANKING , QUIT};
+	enum class SceneState { RUNNING, GOTORANKING, GOTOLVL1, GOTOLVL2, GOTOMENU, EXIT };
+	
+
+

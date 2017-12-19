@@ -1,34 +1,28 @@
+#pragma once
 #include "Scene.h"
 
 
+Scene::Scene() {
+	scenestate = SceneState::RUNNING;
+}
 
-Scene::Scene()
-{
+
+Scene::~Scene() {
+}
+
+void Scene::Draw() {
+
+}
+
+void Scene::HandleEvents(){
+
+}
+
+void Scene::Update() {
 
 }
 
 
-Scene::~Scene()
-{
-
-}
-
-void Scene::Update()
-{
-
-}
-
-void Scene::Draw()
-{
-
-}
-
-void Scene::HandleEvents()
-{
-
-}
-
-SceneState Scene::GetCurrentState()
-{
-	return currentState;
+SceneState Scene::getState() {
+	return scenestate;
 }

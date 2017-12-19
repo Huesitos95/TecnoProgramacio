@@ -1,22 +1,35 @@
 #pragma once
+#include <iostream>
+#include <string>
 #include "Scene.h"
+#include "Renderer.h"
+#include "Types.h"
+#include "Constants.h"
+#include "Button.h"
 #include "Player.h"
+#include "Button.h"
+#include "Level.h"
+#include "Renderer.h"
+#include "HUD.h"
+#include "Game.h"
 
-class Play : public Scene
-{
-private:
-	
-	int level;
-	 //Background;
-
+class Play : public Scene {
 
 public:
-	Play();
-	~Play();
-	void Update() override;
-	void Draw() override;
-	void HandleEvents() override;
-	void RestartLevel();
-	
-};
+	//variables
+	std::string BG_ID;
+	SDL_Rect BG_Rect{ 0,0,SCREEN_WIDTH, SCREEN_HEIGHT };
+	Player player1;
+	Player player2;
+	Level lvl1;
+	Level lvl2;
+	HUD hud;
 
+
+	Play(std::string level);
+	~Play();
+
+	void HandleEvents();
+	void Update();
+	void Draw();
+};
