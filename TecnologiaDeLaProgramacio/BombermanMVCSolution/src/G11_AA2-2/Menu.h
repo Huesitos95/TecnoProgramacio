@@ -12,7 +12,6 @@
 class Menu : public Scene {
 
 private:
-	//variables
 	std::string BG_ID;
 	SDL_Rect BG_Rect{ 0,0,SCREEN_WIDTH, SCREEN_HEIGHT };
 public:
@@ -26,10 +25,7 @@ public:
 	Button ButtonLVL1;
 	Button ButtonLVL2;
 	Button ButtonRanking;
+	Button ButtonMute;
 	
-	
-
-
-
 };
 

@@ -12,8 +12,10 @@ Play::Play(std::string level) {
 	}
 	else if (level == "PLAY2") {
 		lvl2 = Level();
-		std::cout << "He entrado en el nivel 2" << std::endl;
-		R->LoadTexture(BACKGROUND, "../../res/img/bgGame.jpg");
+		R->LoadTexture(BG_ID, "../../res/img/bgGame.jpg");
+
+		// TODO
+		//LEER Y IMPORTAR XML
 		for (int i = 0; i < lvl2.casillasAncho; i++) {
 			lvl2.tablero[i] = new casillas[lvl2.casillasAlto];
 			for (int j = 0; j < lvl2.casillasAlto; j++) {
@@ -48,7 +50,7 @@ Play::Play(std::string level) {
 	R->GetTextureSize(player1.Player_ID);
 	player1.frameWidth = player1.textWidth / 3;
 	player1.frameHeight = player1.textHeight / 4;
-	player1.tmpPosXY = lvl1.CasillaACoordenada(0, 0);
+	player1.tmpPosXY = lvl1.PosToCoord(0, 0);
 	player1.Player_Position.x = player1.tmpPosXY.x;
 	player1.Player_Position.y = player1.tmpPosXY.y;
 	player1.Player_Rect.x = 0;
@@ -69,7 +71,7 @@ Play::Play(std::string level) {
 	R->GetTextureSize(player2.Player_ID);
 	player2.frameWidth = player2.textWidth / 3;
 	player2.frameHeight = player2.textHeight / 4;
-	player2.tmpPosXY = lvl1.CasillaACoordenada(lvl1.casillasAncho-1, 0);
+	player2.tmpPosXY = lvl1.PosToCoord(lvl1.casillasAncho-1, 0);
 	player2.Player_Position.x = player2.tmpPosXY.x;
 	player2.Player_Position.y = player2.tmpPosXY.y;
 	player2.Player_Rect.x = 0;
@@ -84,58 +86,37 @@ Play::Play(std::string level) {
 
 	//HUD
 	hud = HUD();
-	hud.font.id = "game_over";
-	hud.font.path = "../../res/ttf/game_over.ttf";
-	hud.font.size = 100;
+	hud.font = { "game_over","../../res/ttf/game_over.ttf",100 };
 	hud.color = { 0, 0, 0, 0 };
 	R->LoadFont(hud.font);
-	//P1lifes
-	hud.P1lifes.color = hud.color;
-	hud.P1lifes.id = "Buttonlvl1ID";
-	hud.P1lifes.text = "Lifes p1:  " + std::to_string(player1.lifes);
-	hud.P1lifes.h = 50;
-	hud.P1lifes.w = 80;
+
+	//Players
+	//P1
+	hud.P1lifes = { "P1lifesID" , "Lifes P1: " + std::to_string(player1.lifes), {0,0,255,0},80,50 };
 	hud.P1lifesxText= 25;
 	hud.P1lifesyText = -10;
 	R->LoadTextureText(hud.font.id, hud.P1lifes);
 	hud.P1lifes_Rect = { hud.P1lifesxText, hud.P1lifesyText, hud.P1lifes.w, hud.P1lifes.h };
-	//P2lifes
-	hud.P2lifes.color = hud.color;
-	hud.P2lifes.id = "text2_ID";
-	hud.P2lifes.text = "Lifes p2:  " + std::to_string(player2.lifes);
-	hud.P2lifes.h = 50;
-	hud.P2lifes.w = 80;
-	hud.P2lifesxText = 620;
-	hud.P2lifesyText = -10;
-	R->LoadTextureText(hud.font.id, hud.P2lifes);
-	hud.P2lifes_Rect = { hud.P2lifesxText, hud.P2lifesyText, hud.P2lifes.w, hud.P2lifes.h };
-
-	//P1score
-	hud.P1score.color = hud.color;
-	hud.P1score.id = "text3_ID";
-	hud.P1score.text = "Score p1:  " + std::to_string(player1.score);
-	hud.P1score.h = 50;
-	hud.P1score.w = 80;
+	hud.P1score = { "P1ScoreID" , "Score P1: " + std::to_string(player1.score), {0,0,255,0} ,80, 50 };
 	hud.P1scorexText = 25;
 	hud.P1scoreyText = 30;
 	R->LoadTextureText(hud.font.id, hud.P1score);
 	hud.P1score_Rect = { hud.P1scorexText, hud.P1scoreyText, hud.P1score.w, hud.P1score.h };
-	//P2score
-	hud.P2score.color = hud.color;
-	hud.P2score.id = "text4_ID";
-	hud.P2score.text = "Score p2:  " + std::to_string(player2.score);
-	hud.P2score.h = 50;
-	hud.P2score.w = 80;
+
+	//P2
+	hud.P2lifes = { "P2lifesID" , "Lifes P2:  " + std::to_string(player2.lifes),{ 255,0,0,0 },80,50 };
+	hud.P2lifesxText = 620;
+	hud.P2lifesyText = -10;
+	R->LoadTextureText(hud.font.id, hud.P2lifes);
+	hud.P2lifes_Rect = { hud.P2lifesxText, hud.P2lifesyText, hud.P2lifes.w, hud.P2lifes.h };
+	hud.P2score = { "P2ScoreID" , "Score P2: " + std::to_string(player2.score),{ 255,0,0,0 } ,80, 50 };
 	hud.P2scorexText = 620;
 	hud.P2scoreyText = 30;
 	R->LoadTextureText(hud.font.id, hud.P2score);
 	hud.P2score_Rect = { hud.P2scorexText, hud.P2scoreyText, hud.P2score.w, hud.P2score.h };
+	
 	//TIME
-	hud.Time.color = hud.color;
-	hud.Time.id = "text5_ID";
-	hud.Time.text = "Time left:  " + (std::to_string(hud.timeDown));
-	hud.Time.h = 100;
-	hud.Time.w = 300;
+	hud.Time = { "TimeID" , "Time left: " + std::to_string(hud.timeDown), {0,0,0,0} , 300,100 };
 	hud.TimexText = 200;
 	hud.TimeyText = -15;
 	R->LoadTextureText(hud.font.id, hud.Time);
@@ -149,10 +130,10 @@ Play::~Play() {
 
 
 void Play::HandleEvents() {
-	SDL_Event evento;
-	while (SDL_PollEvent(&evento)) {
-		player1.HandleEvents(evento);
-		player2.HandleEvents(evento);
+	SDL_Event event;
+	while (SDL_PollEvent(&event)) {
+		player1.HandleEvents(event);
+		player2.HandleEvents(event);
 	}
 }
 

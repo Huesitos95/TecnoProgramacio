@@ -46,11 +46,11 @@ bool Button::isHovered()
 	return false;
 }
 
-void Button::HandleEvents(SDL_Event evento)
+void Button::HandleEvents(SDL_Event event)
 {
-	switch (evento.type) {
+	switch (event.type) {
 	case SDL_MOUSEBUTTONDOWN:
-		switch (evento.button.button) {
+		switch (event.button.button) {
 		case SDL_BUTTON_LEFT:
 			leftClick = true;
 			break;

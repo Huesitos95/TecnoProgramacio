@@ -31,12 +31,21 @@ Menu::Menu()
 	//Button Ranking
 	ButtonRanking = Button();
 	ButtonRanking.font = { "saiyan" ,"../../res/ttf/saiyan.ttf" ,50 };
-	ButtonRanking.text = { "Buttonlvl3ID" , " Ranking" ,{ 0, 0, 255, 0 }, 200 , 100 };
+	ButtonRanking.text = { "Buttonlvl3ID" , "Ranking" ,{ 0, 0, 255, 0 }, 200 , 100 };
 	ButtonRanking.xText = SCREEN_WIDTH / 2 - ButtonRanking.text.w / 2;
 	ButtonRanking.yText = (SCREEN_HEIGHT / 2)+100;
 	R->LoadFont(ButtonRanking.font);
 	R->LoadTextureText(ButtonRanking.font.id, ButtonRanking.text);
 	ButtonRanking.text_Rect = { ButtonRanking.xText, ButtonRanking.yText, ButtonRanking.text.w, ButtonRanking.text.h };
+
+	// Button Mute
+	ButtonMute = Button();
+	ButtonMute.font = { "saiyan", "../../res/ttf/saiyan.ttf", 50 };
+	ButtonMute.text = { "ButtonMuteID", "Activar So" , {0,0,255,0},200,100 };
+	ButtonMute.xText = SCREEN_WIDTH / 2 - ButtonMute.text.w/2 + 200;
+	ButtonMute.yText = SCREEN_HEIGHT / 2 + 200;
+	R->LoadTextureText(ButtonMute.font.id, ButtonMute.text);
+	ButtonMute.text_Rect = { ButtonMute.xText , ButtonMute.yText, ButtonMute.text.w,ButtonMute.text.h };
 }
 
 
@@ -45,19 +54,26 @@ Menu::~Menu()
 }
 
 void Menu::HandleEvents() {
-	SDL_Event evento;
-	while (SDL_PollEvent(&evento)) {
-		ButtonLVL1.HandleEvents(evento);
-		ButtonLVL2.HandleEvents(evento);
-		ButtonRanking.HandleEvents(evento);
+	SDL_Event event;
+	while (SDL_PollEvent(&event)) {
+		ButtonLVL1.HandleEvents(event);
+		ButtonLVL2.HandleEvents(event);
+		ButtonRanking.HandleEvents(event);
+		ButtonMute.HandleEvents(event);
 		if (ButtonLVL1.isClicked()) {
 			scenestate = SceneState::GOTOLVL1;
 		}
 		if (ButtonLVL2.isClicked()) {
 			scenestate = SceneState::GOTOLVL2;
 		}
-		else if (ButtonRanking.isClicked()) {
+		if (ButtonRanking.isClicked()) {
 			scenestate = SceneState::GOTORANKING;
+		}
+		if (ButtonMute.isClicked()) {
+			
+			//TODO
+			//SDL MIXER VOLUMEN
+
 		}
 	}
 }
@@ -66,6 +82,7 @@ void Menu::Update() {
 	ButtonLVL1.update();
 	ButtonLVL2.update();
 	ButtonRanking.update();
+	ButtonMute.update();
 }
 
 void Menu::Draw() {
@@ -73,6 +90,7 @@ void Menu::Draw() {
 	ButtonLVL1.draw();
 	ButtonLVL2.draw();
 	ButtonRanking.draw();
+	ButtonMute.draw();
 	R->Render();
 	R->Clear();
 }

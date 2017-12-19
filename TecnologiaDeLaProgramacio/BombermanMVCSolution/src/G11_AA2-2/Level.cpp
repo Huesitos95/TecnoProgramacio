@@ -62,7 +62,7 @@ Level::~Level()
 
 }
 
-Vector2 Level::CoordenadaACasilla(int x, int y)
+Vector2 Level::CoordToPos(int x, int y)
 {
 	int iCoordenada;
 	int jCoordenada;
@@ -72,7 +72,7 @@ Vector2 Level::CoordenadaACasilla(int x, int y)
 	return casilla;
 }
 
-Vector2 Level::CasillaACoordenada(int i, int j)
+Vector2 Level::PosToCoord(int i, int j)
 {
 	int iCasilla;
 	int jCasilla;
@@ -88,11 +88,11 @@ void Level::Draw()
 	for (int i = 0; i < casillasAncho; ++i) {
 		for (int j = 0; j < casillasAlto; ++j) {
 			if (tablero[i][j] == casillas::INDESTRUCTIBLE_WALL) {
-				Vector2 coordenadas = CasillaACoordenada(i, j);
+				Vector2 coordenadas = PosToCoord(i, j);
 				Indestructible_wall.draw(Indestructible_wall.Wall_ID, coordenadas.x, coordenadas.y);
 			}
 			else if (tablero[i][j] == casillas::DESTRUCTIBLE_WALL) {
-				Vector2 coordenadas = CasillaACoordenada(i, j);
+				Vector2 coordenadas = PosToCoord(i, j);
 				Destructible_wall.draw(Destructible_wall.Wall_ID, coordenadas.x, coordenadas.y);
 			}
 		}

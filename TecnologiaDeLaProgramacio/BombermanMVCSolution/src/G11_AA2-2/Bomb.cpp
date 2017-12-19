@@ -136,8 +136,7 @@ Bomb::~Bomb() {
 }
 
 void Bomb::Update() {
-	tmpPosXY = lvl.CoordenadaACasilla(bombs_Position.x, bombs_Position.y);
-	//std::cout << "la bomb esta en esta en la casilla " << tmpPosXY.x << " " << tmpPosXY.y << std::endl;
+	tmpPosXY = lvl.CoordToPos(bombs_Position.x, bombs_Position.y);
 	if (timeDown > 0) {
 		deltaTime = (clock() - lastTime);
 		lastTime = clock();
@@ -145,7 +144,6 @@ void Bomb::Update() {
 		timeDown -= deltaTime;
 		//std::cout << timeDown << std::endl;
 		if (timeDown <= 0) {
-			//std::cout << "destruir bomb" << std::endl;
 			explosion = true;
 		}
 	}

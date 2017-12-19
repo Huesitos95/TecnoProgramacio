@@ -7,7 +7,7 @@ Player::Player(){
 	Player_ID = PLAYER1_SPRITE;
 	R->LoadTexture(Player_ID, PlayerPath);
 	R->GetTextureSize(Player_ID);
-	tmpPosXY = lvl.CasillaACoordenada(0, 0);
+	tmpPosXY = lvl.PosToCoord(0, 0);
 	frameWidth = textWidth / 3;
 	frameHeight = textHeight / 4;
 	Player_Position.x = tmpPosXY.x;
@@ -24,8 +24,8 @@ Player::Player(){
 	bomb = Bomb();
 	lvl = Level();
 
-	lvl.limiteIJ = lvl.CasillaACoordenada(lvl.limiteIJ.x, lvl.limiteIJ.y);
-	lvl.limiteWH = lvl.CasillaACoordenada(lvl.limiteWH.x, lvl.limiteWH.y);
+	lvl.limiteIJ = lvl.PosToCoord(lvl.limiteIJ.x, lvl.limiteIJ.y);
+	lvl.limiteWH = lvl.PosToCoord(lvl.limiteWH.x, lvl.limiteWH.y);
 }
 
 
@@ -33,8 +33,8 @@ Player::~Player()
 {
 }
 
-void Player::HandleEvents(SDL_Event evento) {
-	switch (evento.type) {
+void Player::HandleEvents(SDL_Event event) {
+	switch (event.type) {
 	default:
 		break;
 	}
@@ -56,7 +56,7 @@ void Player::Update(SDL_Scancode UP, SDL_Scancode DOWN, SDL_Scancode LEFT, SDL_S
 	const Uint8 *keyboardstate = SDL_GetKeyboardState(NULL);
 
 	if (keyboardstate[UP] && Player_Position.y > lvl.limiteIJ.y) {
-		tmpPosXY = lvl.CoordenadaACasilla(Player_Position.x + LADO_CASILLA / 2, Player_Position.y + LADO_CASILLA*2);
+		tmpPosXY = lvl.CoordToPos(Player_Position.x + LADO_CASILLA / 2, Player_Position.y + LADO_CASILLA*2);
 		if (lvl.tablero[tmpPosXY.x][tmpPosXY.y - 1] != casillas::INDESTRUCTIBLE_WALL && lvl.tablero[tmpPosXY.x][tmpPosXY.y - 1] != casillas::DESTRUCTIBLE_WALL && lvl.tablero[tmpPosXY.x][tmpPosXY.y - 1] != casillas::BOMB) {
 			lvl.tablero[tmpPosXY.x][tmpPosXY.y - 1] = casillas::PLAYER;
 			Player_Rect.y = 0;
@@ -69,7 +69,7 @@ void Player::Update(SDL_Scancode UP, SDL_Scancode DOWN, SDL_Scancode LEFT, SDL_S
 		}
 	}
 	else if (keyboardstate[DOWN] && Player_Position.y + Player_Position.h < lvl.limiteWH.y) {
-		tmpPosXY = lvl.CoordenadaACasilla(Player_Position.x + LADO_CASILLA / 2, Player_Position.y + LADO_CASILLA*1.3);
+		tmpPosXY = lvl.CoordToPos(Player_Position.x + LADO_CASILLA / 2, Player_Position.y + LADO_CASILLA*1.3);
 		if (lvl.tablero[tmpPosXY.x][tmpPosXY.y + 1] != casillas::INDESTRUCTIBLE_WALL && lvl.tablero[tmpPosXY.x][tmpPosXY.y + 1] != casillas::DESTRUCTIBLE_WALL && lvl.tablero[tmpPosXY.x][tmpPosXY.y + 1] != casillas::BOMB) {
 			lvl.tablero[tmpPosXY.x][tmpPosXY.y + 1] = casillas::PLAYER;
 			Player_Rect.y = 48 * 2;
@@ -82,7 +82,7 @@ void Player::Update(SDL_Scancode UP, SDL_Scancode DOWN, SDL_Scancode LEFT, SDL_S
 		}
 	}
 	else if (keyboardstate[LEFT] && Player_Position.x > lvl.limiteIJ.x) {
-		tmpPosXY = lvl.CoordenadaACasilla(Player_Position.x + Player_Position.w, Player_Position.y);
+		tmpPosXY = lvl.CoordToPos(Player_Position.x + Player_Position.w, Player_Position.y);
 		if (lvl.tablero[tmpPosXY.x - 1][tmpPosXY.y] != casillas::INDESTRUCTIBLE_WALL && lvl.tablero[tmpPosXY.x - 1][tmpPosXY.y] != casillas::DESTRUCTIBLE_WALL && lvl.tablero[tmpPosXY.x - 1][tmpPosXY.y] != casillas::BOMB) {
 			lvl.tablero[tmpPosXY.x - 1][tmpPosXY.y] = casillas::PLAYER;
 			Player_Rect.y = 48;
@@ -95,7 +95,7 @@ void Player::Update(SDL_Scancode UP, SDL_Scancode DOWN, SDL_Scancode LEFT, SDL_S
 		}
 	}
 	else if (keyboardstate[RIGHT] && Player_Position.x + Player_Position.w < lvl.limiteWH.x) {
-		tmpPosXY = lvl.CoordenadaACasilla(Player_Position.x, Player_Position.y);
+		tmpPosXY = lvl.CoordToPos(Player_Position.x, Player_Position.y);
 		if (lvl.tablero[tmpPosXY.x + 1][tmpPosXY.y] != casillas::INDESTRUCTIBLE_WALL && lvl.tablero[tmpPosXY.x + 1][tmpPosXY.y] != casillas::DESTRUCTIBLE_WALL && lvl.tablero[tmpPosXY.x + 1][tmpPosXY.y] != casillas::BOMB) {
 			lvl.tablero[tmpPosXY.x + 1][tmpPosXY.y] = casillas::PLAYER;
 			Player_Rect.y = 48 * 3;
@@ -109,8 +109,8 @@ void Player::Update(SDL_Scancode UP, SDL_Scancode DOWN, SDL_Scancode LEFT, SDL_S
 	}
 	if (!dropbomb) {
 		if (keyboardstate[DropBomb]) {
-			tmpPosXY = lvl.CoordenadaACasilla(Player_Position.x, Player_Position.y);
-			tmpPosXY = lvl.CasillaACoordenada(tmpPosXY.x, tmpPosXY.y);
+			tmpPosXY = lvl.CoordToPos(Player_Position.x, Player_Position.y);
+			tmpPosXY = lvl.PosToCoord(tmpPosXY.x, tmpPosXY.y);
 			bomb.lastTime = clock();
 			bomb.timeDown = 3.;
 			bomb.deltaTime = 0;

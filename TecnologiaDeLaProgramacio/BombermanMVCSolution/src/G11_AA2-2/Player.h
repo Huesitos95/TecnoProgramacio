@@ -39,7 +39,7 @@ public:
 	//Métodos
 	Player();
 	~Player();
-	void HandleEvents(SDL_Event evento);
+	void HandleEvents(SDL_Event event);
 	void Update(SDL_Scancode UP, SDL_Scancode DOWN, SDL_Scancode LEFT, SDL_Scancode RIGHT, SDL_Scancode DropBomb);
 	void Draw();
 	void SpawnBomb(int i, int j, bool up, bool up2, bool down, bool down2, bool left, bool left2, bool right, bool right2);

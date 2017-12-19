@@ -28,9 +28,9 @@ public:
 	Wall Indestructible_wall;
 
 
-	Vector2 CoordenadaACasilla(int x, int y);
+	Vector2 CoordToPos(int x, int y);
 
-	Vector2 CasillaACoordenada(int i, int j);
+	Vector2 PosToCoord(int i, int j);
 
 	Level();
 	~Level();

@@ -37,10 +37,10 @@ void Ranking::Update() {
 
 
 void Ranking::HandleEvents() {
-	SDL_Event evento;
-	while (SDL_PollEvent(&evento)) {
-		ButtonMenu.HandleEvents(evento);
-		ButtonMenu.HandleEvents(evento);
+	SDL_Event event;
+	while (SDL_PollEvent(&event)) {
+		ButtonMenu.HandleEvents(event);
+		ButtonMenu.HandleEvents(event);
 		if (ButtonMenu.isClicked()) {
 			scenestate = SceneState::GOTOMENU;
 		}
