@@ -23,15 +23,15 @@
 		int h;
 	};
 
-	enum class casillas : char {
-		DESTRUCTIBLE_WALL='w', INDESTRUCTIBLE_WALL = 'W', EMPTY = 'E', PLAYER = 'P', BOMB = 'B'
-	};
-
 	enum class Key {UP, DOWN, LEFT, RIGHT, NONE};
 
 	enum class GameState { PLAY1, PLAY2, MENU, RANKING, EXIT };
 
 	enum class SceneState { RUNNING, GOTORANKING, GOTOLVL1, GOTOLVL2, GOTOMENU, EXIT };
+
+	enum class cells : char {
+		DESTRUCTIBLE_WALL = 'w', INDESTRUCTIBLE_WALL = 'W', EMPTY = 'E', PLAYER = 'P', BOMB = 'B'
+	};
 	
 
 

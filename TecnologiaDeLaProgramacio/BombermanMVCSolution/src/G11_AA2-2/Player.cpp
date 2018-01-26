@@ -7,25 +7,21 @@ Player::Player(){
 	Player_ID = PLAYER1_SPRITE;
 	R->LoadTexture(Player_ID, PlayerPath);
 	R->GetTextureSize(Player_ID);
-	tmpPosXY = lvl.PosToCoord(0, 0);
+	PlayerPosXY = { 0,0 };
 	frameWidth = textWidth / 3;
 	frameHeight = textHeight / 4;
-	Player_Position.x = tmpPosXY.x;
-	Player_Position.y = tmpPosXY.y;
+	Player_Position.x = PlayerPosXY.x;
+	Player_Position.y = PlayerPosXY.y;
 	Player_Rect.x = 0;
 	Player_Rect.y = 0;
-	Player_Position.h = LADO_CASILLA;
+	Player_Position.h = CELLSIZE;
 	Player_Rect.h = frameHeight;
-	Player_Position.w = LADO_CASILLA;
+	Player_Position.w = CELLSIZE;
 	Player_Rect.w = frameWidth;
 	frameTime = 0;
 	lifes = 3;
 	score = 0;
 	bomb = Bomb();
-	lvl = Level();
-
-	lvl.limiteIJ = lvl.PosToCoord(lvl.limiteIJ.x, lvl.limiteIJ.y);
-	lvl.limiteWH = lvl.PosToCoord(lvl.limiteWH.x, lvl.limiteWH.y);
 }
 
 
@@ -40,95 +36,53 @@ void Player::HandleEvents(SDL_Event event) {
 	}
 }
 
-void Player::Update(SDL_Scancode UP, SDL_Scancode DOWN, SDL_Scancode LEFT, SDL_Scancode RIGHT, SDL_Scancode DropBomb) {
+Key Player::Update(SDL_Scancode UP, SDL_Scancode DOWN, SDL_Scancode LEFT, SDL_Scancode RIGHT, SDL_Scancode DropBomb) {
 	frameTime++;
 	if (FPS / frameTime <= 5) {
 		frameTime = 0;
 		//player 1
 		if (Player_Rect.x == 48 * 2)
-			cambiop = -1;
+			swap = -1;
 		else if (Player_Rect.x == 0)
-			cambiop = 1;
-		Player_Rect.x += 48*cambiop;
+			swap = 1;
+		Player_Rect.x += 48*swap;
 
 	}
 
 	const Uint8 *keyboardstate = SDL_GetKeyboardState(NULL);
 
-	if (keyboardstate[UP] && Player_Position.y > lvl.limiteIJ.y) {
-		tmpPosXY = lvl.CoordToPos(Player_Position.x + LADO_CASILLA / 2, Player_Position.y + LADO_CASILLA*2);
-		if (lvl.tablero[tmpPosXY.x][tmpPosXY.y - 1] != casillas::INDESTRUCTIBLE_WALL && lvl.tablero[tmpPosXY.x][tmpPosXY.y - 1] != casillas::DESTRUCTIBLE_WALL && lvl.tablero[tmpPosXY.x][tmpPosXY.y - 1] != casillas::BOMB) {
-			lvl.tablero[tmpPosXY.x][tmpPosXY.y - 1] = casillas::PLAYER;
-			Player_Rect.y = 0;
-			if (Rollers) {
-				Player_Position.y -= speed * RollersBoost;
-			}
-			else {
-				Player_Position.y -= speed;
-			}
-		}
+	if (keyboardstate[UP]) {
+		return Key::UP;
 	}
-	else if (keyboardstate[DOWN] && Player_Position.y + Player_Position.h < lvl.limiteWH.y) {
-		tmpPosXY = lvl.CoordToPos(Player_Position.x + LADO_CASILLA / 2, Player_Position.y + LADO_CASILLA*1.3);
-		if (lvl.tablero[tmpPosXY.x][tmpPosXY.y + 1] != casillas::INDESTRUCTIBLE_WALL && lvl.tablero[tmpPosXY.x][tmpPosXY.y + 1] != casillas::DESTRUCTIBLE_WALL && lvl.tablero[tmpPosXY.x][tmpPosXY.y + 1] != casillas::BOMB) {
-			lvl.tablero[tmpPosXY.x][tmpPosXY.y + 1] = casillas::PLAYER;
-			Player_Rect.y = 48 * 2;
-			if (Rollers) {
-				Player_Position.y += speed * RollersBoost;
-			}
-			else {
-				Player_Position.y += speed;
-			}
-		}
+	else if (keyboardstate[DOWN]) {
+		return Key::DOWN;
 	}
-	else if (keyboardstate[LEFT] && Player_Position.x > lvl.limiteIJ.x) {
-		tmpPosXY = lvl.CoordToPos(Player_Position.x + Player_Position.w, Player_Position.y);
-		if (lvl.tablero[tmpPosXY.x - 1][tmpPosXY.y] != casillas::INDESTRUCTIBLE_WALL && lvl.tablero[tmpPosXY.x - 1][tmpPosXY.y] != casillas::DESTRUCTIBLE_WALL && lvl.tablero[tmpPosXY.x - 1][tmpPosXY.y] != casillas::BOMB) {
-			lvl.tablero[tmpPosXY.x - 1][tmpPosXY.y] = casillas::PLAYER;
-			Player_Rect.y = 48;
-			if (Rollers) {
-				Player_Position.x -= speed * RollersBoost;
-			}
-			else {
-				Player_Position.x -= speed;
-			}
-		}
+	else if (keyboardstate[LEFT]) {
+		return Key::LEFT;
 	}
-	else if (keyboardstate[RIGHT] && Player_Position.x + Player_Position.w < lvl.limiteWH.x) {
-		tmpPosXY = lvl.CoordToPos(Player_Position.x, Player_Position.y);
-		if (lvl.tablero[tmpPosXY.x + 1][tmpPosXY.y] != casillas::INDESTRUCTIBLE_WALL && lvl.tablero[tmpPosXY.x + 1][tmpPosXY.y] != casillas::DESTRUCTIBLE_WALL && lvl.tablero[tmpPosXY.x + 1][tmpPosXY.y] != casillas::BOMB) {
-			lvl.tablero[tmpPosXY.x + 1][tmpPosXY.y] = casillas::PLAYER;
-			Player_Rect.y = 48 * 3;
-			if (Rollers) {
-				Player_Position.x += speed * RollersBoost;
-			}
-			else {
-				Player_Position.x += speed;
-			}
-		}
+	else if (keyboardstate[RIGHT]) {
+		return Key::RIGHT;
 	}
-	if (!dropbomb) {
-		if (keyboardstate[DropBomb]) {
-			tmpPosXY = lvl.CoordToPos(Player_Position.x, Player_Position.y);
-			tmpPosXY = lvl.PosToCoord(tmpPosXY.x, tmpPosXY.y);
-			bomb.lastTime = clock();
-			bomb.timeDown = 3.;
-			bomb.deltaTime = 0;
-			std::cout << "drop bomb" << std::endl;			
-			pBomb = tmpPosXY;
-			dropbomb = true;
-		}
+	else {
+		return Key::NONE;
 	}
 }
 void Player::Draw() {
 	if (dropbomb) {
 		Player::SpawnBomb(pBomb.x, pBomb.y, up, up2, down, down2, left, left2, right, right2);
-		//std::cout << pBomb.x <<" "<< pBomb.y  << std::endl;
 	}
 	if (bomb.explosion) {
 		bomb.lastTime = clock();
 		bomb.timeDown = 3.;
 		bomb.deltaTime = 0;
+		up = true;
+		up2 = true;
+		down = true;
+		down2 = true;
+		left = true;
+		left2 = true;
+		right = true;
+		right2 = true;
 		dropbomb = false;
 		bomb.explosion = false;
 	}

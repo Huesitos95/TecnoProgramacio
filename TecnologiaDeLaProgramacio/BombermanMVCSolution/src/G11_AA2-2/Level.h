@@ -21,16 +21,16 @@ public:
 	SDL_Rect Wall_Rect, Wall_Position;
 	SDL_Rect GameObject_Rect, GameObject_Position;
 	GameState gamestate;
-	int casillasAncho, casillasAlto;
+	int cellW, cellH;
 	Vector2 limiteIJ, limiteWH;
-	casillas **tablero;
+	cells **tablero;
 	Wall Destructible_wall;
 	Wall Indestructible_wall;
 
 
-	Vector2 CoordToPos(int x, int y);
+	Vector2 CoordToCell(int x, int y);
 
-	Vector2 PosToCoord(int i, int j);
+	Vector2 CellToCoord(int i, int j);
 
 	Level();
 	~Level();
@@ -38,9 +38,6 @@ public:
 
 	void Draw(); 
 	void Update(); 
-	void InputHandler(); 
-	void SpawnObject();
-	void DestroyObject();
 
 };
 

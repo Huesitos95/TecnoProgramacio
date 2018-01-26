@@ -11,7 +11,7 @@
 
 #define FPS 60
 
-#define LADO_CASILLA 48
+#define CELLSIZE 48
 
 const std::string BACKGROUND = "BACKGROUND";
 const std::string BOMB = "BOMB";

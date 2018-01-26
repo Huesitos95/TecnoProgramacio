@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Game>
+	<Level id="1" time="60" lives="3">
+		<Destructible>
+			<Wall i="2" j="1"/>
+			<Wall i="2" j="2"/>
+			<Wall i="2" j="3"/>
+			<Wall i="2" j="4"/>
+			<Wall i="2" j="5"/>
+			<Wall i="2" j="6"/>
+			<Wall i="2" j="7"/>
+			<Wall i="2" j="8"/>
+			<Wall i="2" j="9"/>
+			<Wall i="2" j="10"/>
+			<Wall i="2" j="11"/>
+			<Wall i="4" j="1"/>
+			<Wall i="4" j="2"/>
+			<Wall i="4" j="3"/>
+			<Wall i="4" j="4"/>
+			<Wall i="4" j="5"/>
+			<Wall i="4" j="6"/>
+			<Wall i="4" j="7"/>
+			<Wall i="4" j="8"/>
+			<Wall i="4" j="9"/>
+			<Wall i="4" j="10"/>
+			<Wall i="4" j="11"/>
+			<Wall i="8" j="1"/>
+			<Wall i="8" j="2"/>
+			<Wall i="8" j="3"/>
+			<Wall i="8" j="4"/>
+			<Wall i="8" j="5"/>
+			<Wall i="8" j="6"/>
+			<Wall i="8" j="7"/>
+			<Wall i="8" j="8"/>
+			<Wall i="8" j="9"/>
+			<Wall i="8" j="10"/>
+			<Wall i="8" j="11"/>
+		</Destructible>
+		<Fixed>
+			<Wall i="1" j="1"/>
+			<Wall i="1" j="3"/>
+			<Wall i="1" j="5"/>
+			<Wall i="1" j="7"/>
+			<Wall i="1" j="9"/>
+			<Wall i="1" j="11"/>
+			<Wall i="3" j="1"/>
+			<Wall i="3" j="3"/>
+			<Wall i="3" j="5"/>
+			<Wall i="3" j="7"/>
+			<Wall i="3" j="9"/>
+			<Wall i="3" j="11"/>
+			<Wall i="5" j="1"/>
+			<Wall i="5" j="3"/>
+			<Wall i="5" j="5"/>
+			<Wall i="5" j="7"/>
+			<Wall i="5" j="9"/>
+			<Wall i="5" j="11"/>
+			<Wall i="7" j="1"/>
+			<Wall i="7" j="3"/>
+			<Wall i="7" j="5"/>
+			<Wall i="7" j="7"/>
+			<Wall i="7" j="9"/>
+			<Wall i="7" j="11"/>
+			<Wall i="9" j="1"/>
+			<Wall i="9" j="3"/>
+			<Wall i="9" j="5"/>
+			<Wall i="9" j="7"/>
+			<Wall i="9" j="9"/>
+			<Wall i="9" j="11"/>
+		</Fixed>
+	</Level>
+		<Level id="2" time="25" lives="1">
+		<Fixed>
+			<Wall i="2" j="1"/>
+			<Wall i="2" j="3"/>
+			<Wall i="2" j="5"/>
+			<Wall i="2" j="7"/>
+			<Wall i="2" j="9"/>
+			<Wall i="2" j="11"/>
+			<Wall i="4" j="3"/>
+			<Wall i="4" j="6"/>
+			<Wall i="4" j="8"/>
+			<Wall i="4" j="10"/>
+			<Wall i="6" j="4"/>
+			<Wall i="6" j="7"/>
+			<Wall i="6" j="9"/>
+			<Wall i="8" j="5"/>
+			<Wall i="8" j="8"/>
+			<Wall i="10" j="6"/>
+		</Fixed>
+		<Destructible>
+			<Wall i="1" j="1"/>
+			<Wall i="1" j="3"/>
+			<Wall i="1" j="5"/>
+			<Wall i="1" j="7"/>
+			<Wall i="1" j="9"/>
+			<Wall i="3" j="1"/>
+			<Wall i="3" j="3"/>
+			<Wall i="3" j="5"/>
+			<Wall i="3" j="7"/>
+			<Wall i="3" j="9"/>
+			<Wall i="4" j="1"/>
+			<Wall i="4" j="4"/>
+			<Wall i="4" j="5"/>
+			<Wall i="4" j="7"/>
+			<Wall i="4" j="9"/>
+			<Wall i="6" j="1"/>
+			<Wall i="6" j="3"/>
+			<Wall i="6" j="5"/>
+			<Wall i="6" j="6"/>
+			<Wall i="6" j="8"/>
+			<Wall i="7" j="1"/>
+			<Wall i="7" j="3"/>
+			<Wall i="7" j="5"/>
+			<Wall i="7" j="7"/>
+			<Wall i="7" j="9"/>
+			<Wall i="8" j="1"/>
+			<Wall i="8" j="3"/>
+			<Wall i="8" j="7"/>
+			<Wall i="8" j="9"/>
+			<Wall i="10" j="1"/>
+			<Wall i="10" j="3"/>
+			<Wall i="10" j="5"/>
+			<Wall i="10" j="7"/>
+			<Wall i="10" j="9"/>
+		</Destructible>
+	</Level>
+</Game>

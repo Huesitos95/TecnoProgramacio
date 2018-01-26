@@ -37,7 +37,7 @@ Bomb::Bomb()
 	//BOMB
 	frameWidth = textWidth / 3;
 	frameHeight = textHeight / 2;
-	tmpPosXY;
+	PlayerPosXY;
 	bombs_Rect.x = 0;
 	bombs_Rect.y = frameHeight;
 	bombs_Position.h = 48;
@@ -136,7 +136,7 @@ Bomb::~Bomb() {
 }
 
 void Bomb::Update() {
-	tmpPosXY = lvl.CoordToPos(bombs_Position.x, bombs_Position.y);
+	PlayerPosXY = lvl.CoordToCell(bombs_Position.x, bombs_Position.y);
 	if (timeDown > 0) {
 		deltaTime = (clock() - lastTime);
 		lastTime = clock();
@@ -145,6 +145,7 @@ void Bomb::Update() {
 		//std::cout << timeDown << std::endl;
 		if (timeDown <= 0) {
 			explosion = true;
+			exploding = false;
 		}
 	}
 
@@ -159,6 +160,7 @@ void Bomb::Draw(int i, int j, bool up, bool up2, bool down, bool down2, bool lef
 		}
 		else if (timeDown <= 1) {
 			std::cout << "Deberia salir la explosion" << std::endl;
+			exploding = true;
 			//bomb0
 			Explosion_Position.x = bombs_Position.x;
 			Explosion_Position.y = bombs_Position.y;
@@ -171,7 +173,7 @@ void Bomb::Draw(int i, int j, bool up, bool up2, bool down, bool down2, bool lef
 			if (!up) {
 				//bomb1 = arriba 1
 				Explosion1_Position.x = bombs_Position.x;
-				Explosion1_Position.y = bombs_Position.y - LADO_CASILLA * 1;
+				Explosion1_Position.y = bombs_Position.y - CELLSIZE * 1;
 				Explosion1_Rect.x = frameWidth * 2;
 				Explosion1_Rect.y = frameWidth * 6;
 				Explosion1_Position.h = 48;
@@ -183,7 +185,7 @@ void Bomb::Draw(int i, int j, bool up, bool up2, bool down, bool down2, bool lef
 			if (!up2) {
 				//bomb2 = arriba 2
 				Explosion2_Position.x = bombs_Position.x;
-				Explosion2_Position.y = bombs_Position.y - LADO_CASILLA * 2;
+				Explosion2_Position.y = bombs_Position.y - CELLSIZE * 2;
 				Explosion2_Rect.x = frameWidth * 2;
 				Explosion2_Rect.y = frameWidth * 3;
 				Explosion2_Position.h = 48;
@@ -194,7 +196,7 @@ void Bomb::Draw(int i, int j, bool up, bool up2, bool down, bool down2, bool lef
 			}
 			if (!right) {
 				//bomb3 = derecha 1
-				Explosion3_Position.x = bombs_Position.x + LADO_CASILLA;
+				Explosion3_Position.x = bombs_Position.x + CELLSIZE;
 				Explosion3_Position.y = bombs_Position.y;
 				Explosion3_Rect.x = frameWidth * 2;
 				Explosion3_Rect.y = frameWidth * 5;
@@ -206,7 +208,7 @@ void Bomb::Draw(int i, int j, bool up, bool up2, bool down, bool down2, bool lef
 			}
 			if (!right2) {
 				//bomb4 = derecha 2
-				Explosion4_Position.x = bombs_Position.x + LADO_CASILLA * 2;
+				Explosion4_Position.x = bombs_Position.x + CELLSIZE * 2;
 				Explosion4_Position.y = bombs_Position.y;
 				Explosion4_Rect.x = frameWidth * 2;
 				Explosion4_Rect.y = frameWidth * 2;
@@ -218,7 +220,7 @@ void Bomb::Draw(int i, int j, bool up, bool up2, bool down, bool down2, bool lef
 			}
 			if (!left) {
 				//bomb5 = izquierda 1
-				Explosion5_Position.x = bombs_Position.x - LADO_CASILLA;
+				Explosion5_Position.x = bombs_Position.x - CELLSIZE;
 				Explosion5_Position.y = bombs_Position.y;
 				Explosion5_Rect.x = frameWidth * 2;
 				Explosion5_Rect.y = frameWidth * 5;
@@ -230,7 +232,7 @@ void Bomb::Draw(int i, int j, bool up, bool up2, bool down, bool down2, bool lef
 			}
 			if (!left2) {
 				//bomb5 = izquierda 2
-				Explosion6_Position.x = bombs_Position.x - LADO_CASILLA * 2;
+				Explosion6_Position.x = bombs_Position.x - CELLSIZE * 2;
 				Explosion6_Position.y = bombs_Position.y;
 				Explosion6_Rect.x = frameWidth * 2;;
 				Explosion6_Rect.y = frameWidth * 1;
@@ -243,7 +245,7 @@ void Bomb::Draw(int i, int j, bool up, bool up2, bool down, bool down2, bool lef
 			if (!down) {
 				//bomb7 = abajo 1
 				Explosion7_Position.x = bombs_Position.x;
-				Explosion7_Position.y = bombs_Position.y + LADO_CASILLA * 1;
+				Explosion7_Position.y = bombs_Position.y + CELLSIZE * 1;
 				Explosion7_Rect.x = frameWidth * 2;
 				Explosion7_Rect.y = frameWidth * 6;
 				Explosion7_Position.h = 48;
@@ -255,7 +257,7 @@ void Bomb::Draw(int i, int j, bool up, bool up2, bool down, bool down2, bool lef
 			if (!down2) {
 				//bomb7 = abajo 2
 				Explosion8_Position.x = bombs_Position.x;
-				Explosion8_Position.y = bombs_Position.y + LADO_CASILLA * 2;
+				Explosion8_Position.y = bombs_Position.y + CELLSIZE * 2;
 				Explosion8_Rect.x = frameWidth * 2;
 				Explosion8_Rect.y = frameWidth * 4;
 				Explosion8_Position.h = 48;

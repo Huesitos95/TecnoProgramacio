@@ -11,7 +11,7 @@
 class Bomb
 {
 public:
-	Vector2 tmpPosXY;
+	Vector2 PlayerPosXY;
 	std::string bombs_ID, bombsPath;
 	std::string Explosion_ID, ExplosionPath;
 	std::string Explosion_ID1;
@@ -44,6 +44,7 @@ public:
 	float timeDown = 5.;
 	float deltaTime = 0;
 	bool explosion = false;
+	bool exploding = false;
 	Level lvl;
 
 };
