@@ -19,13 +19,19 @@ public:
 	int score;
 	int speed = 3;
 	int RollersBoost = 1.8;
+	bool PowerUp = false;
+	bool damaged = false;
 	Vector2 PlayerPosXY;
 	Vector2 PlayerPosWH;
 	Vector2 pBombXY;
 	Vector2 pBombIJ;
 	Bomb bomb;
 
-	//Gestio Bomba
+	clock_t lastTime = clock();
+	float timeDown = 10.;
+	float deltaTime = 0;
+
+	//Gestio animacio Bomba
 	bool up;
 	bool up2;
 	bool down;

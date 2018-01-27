@@ -21,7 +21,7 @@ public:
 
 	void setup();
 	void update();
-	void draw();
+	void draw(std::string GameObject_ID, int i, int j);
 
 };
 

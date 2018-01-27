@@ -33,7 +33,9 @@ void GameObject::update()
 {
 }
 
-void GameObject::draw()
+void GameObject::draw(std::string GameObject_ID, int i, int j)
 {
+	GameObject_Position.x = i;
+	GameObject_Position.y = j;
 	R->PushSprite(GameObject_ID, GameObject_Rect, GameObject_Position);
 }

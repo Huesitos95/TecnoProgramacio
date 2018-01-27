@@ -4,7 +4,6 @@
 #include "GameObject.h"
 #include "Constants.h"
 #include "GameObject.h"
-#include "Wall.h"
 #include "Menu.h"
 #include "Button.h"
 
@@ -13,19 +12,22 @@ public:
 	int auxrandomblock;
 	int time;
 	std::string BG_ID;
-	std::string WALL_ID;
+	std::string GameObject_ID;
 	std::string GAMEOBJECT_ID;
 	std::string LIMIT_ID;
 	SDL_Rect BG_Rect{ 0,0,SCREEN_WIDTH, SCREEN_HEIGHT };
 	SDL_Rect Limit_Rect, Limit_Position;
-	SDL_Rect Wall_Rect, Wall_Position;
 	SDL_Rect GameObject_Rect, GameObject_Position;
 	GameState gamestate;
 	int cellW, cellH;
 	Vector2 limiteIJ, limiteWH;
 	cells **tablero;
-	Wall Destructible_wall;
-	Wall Indestructible_wall;
+	GameObject Destructible_wall;
+	GameObject Indestructible_wall;
+	GameObject Helmet;
+	GameObject Rollers;
+	Vector2 DestroyedWall;
+
 
 
 	Vector2 CoordToCell(int x, int y);
@@ -37,7 +39,7 @@ public:
 
 
 	void Draw(); 
-	void Update(); 
+	void Update(int i, int j); 
 
 };
 

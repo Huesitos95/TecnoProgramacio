@@ -24,6 +24,8 @@ public:
 	SDL_Rect BG_Rect{ 0,0,SCREEN_WIDTH, SCREEN_HEIGHT };
 	Player player1;
 	Player player2;
+	Key player1Key;
+	Key player2Key;
 	Level lvl;
 	HUD hud;
 	int lives;

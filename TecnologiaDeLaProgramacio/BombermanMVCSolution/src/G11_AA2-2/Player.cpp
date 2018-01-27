@@ -50,7 +50,16 @@ Key Player::Update(SDL_Scancode UP, SDL_Scancode DOWN, SDL_Scancode LEFT, SDL_Sc
 	}
 
 	const Uint8 *keyboardstate = SDL_GetKeyboardState(NULL);
-
+	
+	if (!dropbomb) {
+		if (keyboardstate[DropBomb]) {
+			bomb.lastTime = clock();
+			bomb.timeDown = 3.;
+			bomb.deltaTime = 0;
+			std::cout << "drop bomb" << std::endl;
+			return Key::BOMB;
+		}
+	}
 	if (keyboardstate[UP]) {
 		return Key::UP;
 	}
@@ -69,7 +78,7 @@ Key Player::Update(SDL_Scancode UP, SDL_Scancode DOWN, SDL_Scancode LEFT, SDL_Sc
 }
 void Player::Draw() {
 	if (dropbomb) {
-		Player::SpawnBomb(pBomb.x, pBomb.y, up, up2, down, down2, left, left2, right, right2);
+		Player::SpawnBomb(pBombXY.x, pBombXY.y, up, up2, down, down2, left, left2, right, right2);
 	}
 	if (bomb.explosion) {
 		bomb.lastTime = clock();
